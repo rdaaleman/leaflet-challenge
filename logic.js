@@ -29,6 +29,10 @@ function pointToLayerFunc(feature, coordinates){
     }
     let marker = L.circleMarker(coordinates, marker_options)
     return marker;
+    let popupContent = `<b>Magnitude:</b> ${magnitude}<br><b>Depth:</b> ${depth}`;
+    marker.bindPopup(popupContent);
+
+    return marker 
 }
 function getColor(depth){
     switch (true) {
@@ -46,20 +50,23 @@ function getColor(depth){
             return "#008000"; 
     }
 }
-var legend = L.control({
-    position: 'bottomright'
-});
-legend.onAdd = function (){
-    var div = L.DomUtil.create("div","info legend");
-    { label: 'Depth > 90', color: '#ea2c2c' },
-    { label: '70 < Depth <= 90', color: '#FF8C00' },
-    { label: '50 < Depth <= 70', color: '#FFA500' },
-    { label: '30 < Depth <= 50', color: '#FFFF00' },
-    { label: '10 < Depth <= 30', color: '#7CFC00' },
-    { label: 'Depth <= 10', color: '#008000' }
-    return div;
-};
-legend.addTo(map);
+
+
+
+//var legend = L.control({
+    //position: 'bottomright'
+//});
+//legend.onAdd = function (){
+    //var div = L.DomUtil.create("div","info legend");
+    //{ label: 'Depth > 90', color: '#ea2c2c' },
+    //{ label: '70 < Depth <= 90', color: '#FF8C00' },
+    //{ label: '50 < Depth <= 70', color: '#FFA500' },
+    //{ label: '30 < Depth <= 50', color: '#FFFF00' },
+    //{ label: '10 < Depth <= 30', color: '#7CFC00' },
+    //{ label: 'Depth <= 10', color: '#008000' }
+    //return div;
+//};
+//legend.addTo(map);
 
 
 d3.json(QUERY_URL).then(function(data){
